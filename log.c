@@ -20,10 +20,17 @@ client_log(char *mesg)
 		return (int)ERROR_VAL;
 	}
 
-	if (mq_send(mqdes, mesg, len + 1, 1) < 0) {
+  char *buf[MAX_MSG_SIZE];
+  uint16_t *tag = (uint16_t *)buf;
+  *tag = 89;
+  tag = tag + 1;
+  *tag = 40401;
+  memcpy(tag + 1, mesg, len + 1);
+
+	if (mq_send(mqdes, buf, 4 + len + 1, 1) < 0) {
 		perror("mq_send");
 		return (int)ERROR_VAL;
-	}	
+	}
 
 	return (int)SUCCESS_VAL;
 }
