@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <errno.h>
 #include <string.h>
 #include <fcntl.h>
@@ -15,11 +16,13 @@
 #define SUCCESS_VAL 1
 #define MQ_NAME "/mq-comlog"
 #define MAX_MSG_SIZE 512
+#define MAX_TAGS 30
+#define MAX_TAG_VALUE 65000
 
 /* queue descriptor */
 mqd_t mqdes;
 
 int client_init();
-int client_log(char *mesg);
+int client_log(uint16_t *tag_buf, int num_tags, char *mesg);
 
 #endif  /* _INC_LOG_H */

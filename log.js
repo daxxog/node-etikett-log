@@ -1,3 +1,3 @@
 var logger = require('./build/Release/nodelog');
 
-logger.log('Jack is Back');
+logger.log('Flygande mockasiner', 89, 90, 98, 2000);
