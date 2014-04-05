@@ -14,8 +14,9 @@
 
 #define ERROR_VAL 0
 #define SUCCESS_VAL 1
+
 #define MQ_NAME "/mq-comlog"
-#define MAX_MSG_SIZE 512
+#define MAX_MSG_SIZE 1024
 #define MAX_TAGS 30
 #define MAX_TAG_VALUE 65000
 
