@@ -1,9 +1,10 @@
 #include <stdlib.h>
 #include <node.h>
 #include <v8.h>
+#include <limits.h>
 
 extern "C" {
-	#include "log.h"
+	#include "../libetikett/log.h"
 }
 
 using namespace v8;
@@ -16,7 +17,7 @@ Handle<Value> log_msg(const Arguments& args) {
 	HandleScope scope;
 	length = args.Length();
 
-	if (length < 1 || length > MAX_TAGS + 1) {
+	if (length < 1 || length > ETK_MAX_TAGS + 1) {
 		ThrowException(Exception::TypeError(String::New("Wrong number of arguments")));
 		return scope.Close(Boolean::New(0));
 	}
@@ -26,28 +27,20 @@ Handle<Value> log_msg(const Arguments& args) {
 		return scope.Close(Boolean::New(0));
 	}
 
-	/* store number of tags first */
-	*tag_buf = (uint16_t) length - 1;
-	tag_buf++;
-
 	i = 1;
-	int n = 0;
 	while (i < length) {
-		if (!args[i]->IsNumber() && args[i]->NumberValue() > MAX_TAG_VALUE) {
+		if (!args[i]->IsNumber() && args[i]->NumberValue() > USHRT_MAX) {
 			ThrowException(Exception::TypeError(String::New("Wrong arguments")));
 			return scope.Close(Boolean::New(0));
 		}
 
-		/* store tag */
-		*(tag_buf + n++) = args[i++]->NumberValue();
+		*(tag_buf + i - 1) = (uint16_t) args[i++]->NumberValue();
 	}
 
 	v8::String::Utf8Value str(args[0]->ToString());
 	msg = *str;
-	printf("msg: %s\n", msg);
 
-	/* log it, set tag_buf to begin at number of tags */
-	if (client_log(--tag_buf, i, msg) == (int) ERROR_VAL) {
+	if (etk_log(tag_buf, i - 1, msg) == (int) ETK_ERROR_VAL) {
 		return scope.Close(Boolean::New(0));
 	}
 
@@ -58,13 +51,13 @@ void init(Handle<Object> exports) {
 	HandleScope scope;
 	exports->Set(String::NewSymbol("log"), FunctionTemplate::New(log_msg)->GetFunction());
 
-	tag_buf = (uint16_t *) malloc(MAX_MSG_SIZE);
-	if (tag_buf <= 0) {
+	tag_buf = (uint16_t *) malloc(ETK_MAX_MSG_SIZE);
+	if (tag_buf == NULL) {
 		ThrowException(Exception::TypeError(String::New("Could not allocate memory")));
 		return;
 	}
 
-	client_init();
+	etk_init();
 }
 
-NODE_MODULE(nodelog, init)
+NODE_MODULE(etikettlog, init)

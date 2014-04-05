@@ -1,8 +1,8 @@
 {
   "targets": [
     {
-      "target_name": "nodelog",
-      "sources": [ "log.c", "nodelog.cc" ],
+      "target_name": "etikettlog",
+      "sources": [ "../libetikett/log.c", "etikett.cc" ],
       "libraries": [ "-lrt" ]
     }
   ]
