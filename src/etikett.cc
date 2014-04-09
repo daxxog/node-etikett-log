@@ -4,7 +4,7 @@
 #include <limits.h>
 
 extern "C" {
-	#include "../libetikett/log.h"
+	#include "../../libetikett/log.h"
 }
 
 using namespace v8;
