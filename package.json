@@ -2,19 +2,22 @@
 	"name": "etikett-log",
 	"version": "0.1.0",
 	"author": "Jack Engqvist Johansson",
-	"description": "Log to etikett",
+	"description": "Send log messages to etikett",
 	"main": "index.js",
 	"engines": {
 		"node": "0.8.x"
 	},
-	"dependencies": {
-	},
+	"dependencies": { },
 	"devDependencies": {
 	},
 	"scripts": {
+		"test": "node test/testaddon.js",
 		"test": "node test/testmodule.js"
 	},
-	"repository": "",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jacketizer/node-etikett-log"
+	},
 	"keywords": [
 		"etikett",
 		"log"

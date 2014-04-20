@@ -1,6 +1,6 @@
-var etikett = require('../build/Release/etikettlog');
+var etikett = require('../index.js');
 
-if (etikett.log('Testing', 89)) {
+if (etikett.log({ id: 89, cost: 2552 }, 89, 404, 300)) {
 	console.log('OK');
 } else {
 	console.log('NOT OK');

@@ -13,7 +13,12 @@ uint16_t *tag_buf;
 char *msg;
 int i, length;
 
-Handle<Value> log_msg(const Arguments& args) {
+/**
+ * Send a log message.
+ * Arguments: message object, tag array
+ */
+Handle<Value>
+log_msg(const Arguments& args) {
 	HandleScope scope;
 	length = args.Length();
 
@@ -22,10 +27,10 @@ Handle<Value> log_msg(const Arguments& args) {
 		return scope.Close(Boolean::New(0));
 	}
 	
-	if (!args[0]->IsString()) {
-		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
-		return scope.Close(Boolean::New(0));
-	}
+	//if (!args[0]->IsString()) {
+	//	ThrowException(Exception::TypeError(String::New("Wrong arguments")));
+	//	return scope.Close(Boolean::New(0));
+	//}
 
 	i = 1;
 	while (i < length) {
@@ -47,9 +52,10 @@ Handle<Value> log_msg(const Arguments& args) {
 	return scope.Close(Boolean::New(1));
 }
 
-void init(Handle<Object> exports) {
+void
+init(Handle<Object> exports) {
 	HandleScope scope;
-	exports->Set(String::NewSymbol("log"), FunctionTemplate::New(log_msg)->GetFunction());
+	exports->Set(String::NewSymbol("send"), FunctionTemplate::New(log_msg)->GetFunction());
 
 	tag_buf = (uint16_t *) malloc(ETK_MAX_MSG_SIZE);
 	if (tag_buf == NULL) {
