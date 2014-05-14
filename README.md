@@ -1,16 +1,25 @@
 Node Client Library for logging to Etikett
 ==========================================
 
-Install etikett-log:
---------------------
+To install:
+-----------
+```
+$ npm install etikett-log
+```
 
-´´´
-git clone ....
-node-gyp confire
-node-gyp rebuild
-´´´
+To build:
+---------
 
-Usage:
-------
+```
+$ node-gyp configure
+$ node-gyp rebuild
+```
 
-See process.js for example.
+How to use:
+-----------
+
+```
+var etikett = require('etikett-log');
+
+etikett.log({ usr: 89, name: 'Kalle Anka' }, 89, 10, 25);
+```
