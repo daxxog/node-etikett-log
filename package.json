@@ -12,7 +12,8 @@
 	},
 	"scripts": {
 		"test": "node test/testaddon.js",
-		"test": "node test/testmodule.js"
+		"test": "node test/testmodule.js",
+    "install": "node-gyp configure rebuild"
 	},
 	"repository": {
 		"type": "git",
