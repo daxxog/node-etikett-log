@@ -1,6 +1,6 @@
 {
 	"name": "etikett-log",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"author": "Jack Engqvist Johansson",
 	"description": "Send log messages to etikett",
 	"main": "index.js",
