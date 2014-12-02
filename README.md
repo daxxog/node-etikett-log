@@ -1,23 +1,14 @@
-Node Client Library for logging to Etikett
-==========================================
+Node Client Library for emulating etikett-log
+=============================================
 
 To install:
 -----------
 ```
-$ npm install etikett-log
-```
-
-To build:
----------
-
-```
-$ node-gyp configure
-$ node-gyp rebuild
+$ npm install etikett-log2
 ```
 
 How to use:
 -----------
-
 ```
 var etikett = require('etikett-log');
 
