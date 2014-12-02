@@ -1,11 +1,11 @@
 {
 	"name": "etikett-log2",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "Jack Engqvist Johansson / daXXog",
 	"description": "Send log messages to etikett",
 	"main": "index.js",
 	"engines": {
-		"node": "0.8.x"
+		"node": ">=0.8.x"
 	},
 	"dependencies": { },
 	"devDependencies": {
